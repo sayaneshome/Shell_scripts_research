@@ -1,0 +1,12 @@
+
+awk '/^>tr/{close(f);f++}{print $0 > f}'
+uniprot_uncharacterized_protein_human.fasta
+#extract all fasta sequences in different files in directory
+textutil -convert txt *
+#convert the files to txt format
+
+for i in *.txt; do name=`echo $i | awk -F "." '{print $1}'`; blastp
+-query $i -db /Users/sayaneshome/Downloads/ncbi-blast-2.6.0+-src/c++/ReleaseMT/build/db/nr
+-out ${name}.out;done
+
+
