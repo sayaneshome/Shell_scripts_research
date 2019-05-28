@@ -1,6 +1,13 @@
 sort myfile.txt | uniq -u
 
-while read line;  do curl -s -d "dna_sequence="$line"&output_format=fasta" https://web.expasy.org/cgi-bin/translate/dna2aa.cgi >> my_output4_${line}.fasta; done < 'DNA_sequences_chr22_SL16.txt'
+#!/bin/env bash
+i=0
+while IFS=  read -r -d $'\n'
+do
+  ((i++))
+  curl -s -d "dna_sequence=${REPLY}&output_format=fasta" 'https://web.expasy.org/cgi-bin/translate/dna2aa.cgi' > "./output_${i}.fasta"
+done < <( sed '/^>/d' "./input.txt" )
+exit 0
 
 
 while read line;
