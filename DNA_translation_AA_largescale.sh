@@ -31,3 +31,8 @@ sort sequences_SK16_chr38.txt | uniq -u
 sort sequences_SK16_chr38.txt | uniq -u > sequences_SK16_chr38_unique.txt
 
 sed '/@/d' sequences_SK16_chr38_unique.txt > sequences_SK16_chr38_unique_1.txt
+
+
+find . -maxdepth 1 -type f -name '*.fasta' -print0 |
+sort -zV |
+xargs -0 cat >merged_snake.txt
