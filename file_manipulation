@@ -3,3 +3,9 @@
 #prints 20 lines after and 5 lines before the pattern match
  grep -A 20 -B 5 'Sequences producing significant alignments: ' B90_mc10_trinity_novel_2.out > output.txt
  
+#Code computes the total number of reads, their mean, and SD of fastq file
+ for F in *.fastq
+> do 
+> echo  "$F   "
+> awk 'BEGIN { t=0.0;sq=0.0; n=0;} ;NR%4==2 {n++;L=length($0);t+=L;sq+=L*L;}END{m=t/n;printf("total %d avg=%f stddev=%f\n",n,m,sq/n-m*m);}' $F
+> done
