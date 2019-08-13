@@ -9,3 +9,6 @@
 > echo  "$F   "
 > awk 'BEGIN { t=0.0;sq=0.0; n=0;} ;NR%4==2 {n++;L=length($0);t+=L;sq+=L*L;}END{m=t/n;printf("total %d avg=%f stddev=%f\n",n,m,sq/n-m*m);}' $F
 > done
+
+#running kallisto on set of files
+for j in *.fastq; do     kallisto quant -i ../homo_sapiens/transcriptome.idx -g ../homo_sapiens/Homo_sapiens.GRCh38.96.gtf -l 50 -s 1 -o "$j"_1 --genomebam --single "$j"; done
